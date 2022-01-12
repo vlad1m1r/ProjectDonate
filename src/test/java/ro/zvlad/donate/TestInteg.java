@@ -2,10 +2,12 @@ package ro.zvlad.donate;
 
 import static ch.qos.logback.core.joran.action.ActionConst.NULL;
 
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ro.zvlad.donate.dto.PaymentResponseDto;
 import ro.zvlad.donate.dto.cause.CauseDto;
 import ro.zvlad.donate.dto.donation.DonationDto;
 import ro.zvlad.donate.exceptions.GeneralException;
@@ -13,7 +15,9 @@ import ro.zvlad.donate.model.Cause;
 import ro.zvlad.donate.model.Donation;
 import ro.zvlad.donate.service.CauseService;
 import ro.zvlad.donate.service.DonationService;
+import ro.zvlad.donate.service.PaymentService;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 @SpringBootTest
@@ -89,6 +93,22 @@ public class TestInteg {
             assert(retrieve2.getId()<0);
         } catch (GeneralException expectedException) {
 
+        }
+
+    }
+
+
+    @Test
+    public void paymentServiceTest(){
+        PaymentService ps=new PaymentService();
+        DonationDto donationDto=new DonationDto(1,1,"RON","test","test@test.ro");
+        try {
+            var resp = ps.getPaymentUrl(donationDto,1,"test");
+            assert(resp.getUrl().length()>0);
+        } catch (IOException e) {
+            assert(false);
+        } catch (JSONException e) {
+            assert(false);
         }
 
     }
