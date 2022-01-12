@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info:
+  title: Donations project
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /causes:
+    get:
+      tags:
+        - General
+      summary: causes
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /causes/count:
+    get:
+      tags:
+        - General
+      summary: causes/count
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cause/active:
+    get:
+      tags:
+        - General
+      summary: cause/active
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cause/1/total:
+    get:
+      tags:
+        - General
+      summary: cause/{id}/total
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cause:
+    post:
+      tags:
+        - General
+      summary: cause
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Doneaza pentru ceva
+                description: Sustine ceva descriere
+                target_amount: 10000
+                currency: RON
+                created_on: '2022-01-09 00:00:00'
+                ending_on: '2022-03-09 00:00:00'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cause/1:
+    get:
+      tags:
+        - General
+      summary: cause/{id}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - General
+      summary: cause/{id}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: Sustine altceva descriere
+                target_amount: 20000
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - General
+      summary: cause/{id}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /donation/1:
+    get:
+      tags:
+        - General
+      summary: donation/{donationId}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /donations/1:
+    get:
+      tags:
+        - General
+      summary: donations/{causeId}
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /donations/1/count:
+    get:
+      tags:
+        - General
+      summary: donations/{causeId}/count
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /donate:
+    post:
+      tags:
+        - General
+      summary: donate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                cause_id: 1
+                amount: 40
+                currency: RON
+                name: vladimir
+                email: test@test.ro
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
